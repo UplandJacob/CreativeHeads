@@ -77,7 +77,7 @@ public class ItemBuilder {
         var payload = Map.of("textures", Map.of("SKIN", Map.of("url", textureUrl)));
         var json = CreativeHeads.GSON.toJson(payload);
         var base64 = BaseEncoding.base64().encode(json.getBytes(Charsets.UTF_8));
-        var profile = new GameProfile(UUID.randomUUID(), null);
+        var profile = new GameProfile(UUID.randomUUID(), "CreativeHeadsCustomHead");
         profile.getProperties().put("textures", new Property("textures", base64));
         return withCustomSkullProfile(profile);
     }
