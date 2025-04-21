@@ -85,7 +85,7 @@ public class ItemBuilder {
     @SneakyThrows
     public ItemBuilder withCustomSkullProfile(GameProfile profile) {
         checkArgument(meta instanceof SkullMeta, "Not a player head item");
-        var method = meta.getClass().getDeclaredMethod("setProfile", GameProfile.class);
+        var method = meta.getClass().getDeclaredMethod("setProfile", ResolvableProfile.class);
         method.setAccessible(true);
         method.invoke(meta, profile);
         return this;
