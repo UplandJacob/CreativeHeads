@@ -28,7 +28,7 @@ jobs:
         run: cp target/CreativeHeads.jar .
 
       - name: Upload bundle
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: Bundle
           path: |
