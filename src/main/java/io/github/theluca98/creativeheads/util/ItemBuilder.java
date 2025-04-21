@@ -20,6 +20,7 @@ package io.github.theluca98.creativeheads.util;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.BaseEncoding;
+import net.minecraft.world.item.component.ResolvableProfile;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import io.github.theluca98.creativeheads.CreativeHeads;
