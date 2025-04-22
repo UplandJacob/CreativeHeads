@@ -29,7 +29,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.spigotmc.world.item.component.ResolvableProfile;
+import org.bukkit.profile.PlayerProfile;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -78,7 +78,7 @@ public class ItemBuilder {
         var payload = Map.of("textures", Map.of("SKIN", Map.of("url", textureUrl)));
         var json = CreativeHeads.GSON.toJson(payload);
         var base64 = BaseEncoding.base64().encode(json.getBytes(Charsets.UTF_8));
-        var profile = new GameProfile(UUID.randomUUID(), "CreativeHeadsCustomHead");
+        var profile = new PlayerProfile(UUID.randomUUID(), "CreativeHeadsCustomHead");
         profile.getProperties().put("textures", new Property("textures", base64));
         return withCustomSkullProfile(profile);
     }
@@ -86,16 +86,14 @@ public class ItemBuilder {
     @SneakyThrows
     public ItemBuilder withCustomSkullProfile(GameProfile profile) {
         checkArgument(meta instanceof SkullMeta, "Not a player head item");
-        var method = meta.getClass().getDeclaredMethod("setProfile", ResolvableProfile.class);
-        method.setAccessible(true);
-        method.invoke(meta, profile);
+        ((SkullMeta) meta).setOwnerProfile(profile);
         return this;
     }
 
     @SuppressWarnings("deprecation")
     public ItemBuilder withCustomSkullOwner(String playerName) {
         checkArgument(meta instanceof SkullMeta, "Not a player head item");
-        ((SkullMeta) meta).setOwner(playerName);
+        ((SkullMeta) meta).setOwningPlayer(playerName);
         return this;
     }
 
