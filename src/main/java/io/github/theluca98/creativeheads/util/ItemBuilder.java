@@ -138,7 +138,7 @@ public class ItemBuilder {
 				var playerUUID = getOnlineUUID(playerName);
 				var textureUrl = getSkinURL(playerUUID);
 
-				var profile = Bukkit.createPlayerProfile(new UUID(playerUUID), playerName);
+				var profile = Bukkit.createPlayerProfile(UUID.fromString(playerUUID), playerName);
 				var textures = profile.getTextures();
 				try {
 						textures.setSkin(new URL(textureUrl));
