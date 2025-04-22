@@ -23,6 +23,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.ParseResults;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.suggestion.Suggestion;
+import com.mojang.brigadier.context.ParsedCommandNode;
 import com.mojang.brigadier.tree.CommandNode;
 import io.github.theluca98.creativeheads.CreativeHeads;
 import lombok.SneakyThrows;
