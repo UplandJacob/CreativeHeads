@@ -76,6 +76,13 @@ public class ItemBuilder {
         meta.addItemFlags(ItemFlag.values());
         return this;
     }
+  
+    @SneakyThrows
+    public ItemBuilder withCustomSkullProfile(PlayerProfile profile) {
+        checkArgument(meta instanceof SkullMeta, "Not a player head item");
+        ((SkullMeta) meta).setOwnerProfile(profile);
+        return this;
+    }
 
     public ItemBuilder withCustomSkullTexture(String textureUrl) {
         var profile = Bukkit.createPlayerProfile(UUID.randomUUID(), "CreativeHeads");
@@ -90,17 +97,51 @@ public class ItemBuilder {
         }
     }
 
-    @SneakyThrows
-    public ItemBuilder withCustomSkullProfile(PlayerProfile profile) {
-        checkArgument(meta instanceof SkullMeta, "Not a player head item");
-        ((SkullMeta) meta).setOwnerProfile(profile);
-        return this;
-    }
+    public String getOnlineUUID(String username) {
+        try {
+            URL uuidUrl = new URL("https://api.mojang.com/users/profiles/minecraft/" + username);
+            InputStreamReader uuidReader = new InputStreamReader(uuidUrl.openStream());
+            JsonObject uuidJson = JsonParser.parseReader(uuidReader).getAsJsonObject();
+            return uuid = uuidJson.get("id").getAsString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
-    @SuppressWarnings("deprecation")
+    public String getSkinUrl(String uuid) {
+        try {
+            URL profileUrl = new URL("https://sessionserver.mojang.com/session/minecraft/profile/" + uuid);
+            InputStreamReader profileReader = new InputStreamReader(profileUrl.openStream());
+            JsonObject profileJson = JsonParser.parseReader(profileReader).getAsJsonObject();
+            JsonObject properties = profileJson.get("properties").getAsJsonArray().get(0).getAsJsonObject();
+            String texture = properties.get("value").getAsString();
+
+            JsonObject textureJson = JsonParser.parseString(new String(Base64.getDecoder().decode(texture))).getAsJsonObject();
+            return textureJson.get("textures").getAsJsonObject().get("SKIN").getAsJsonObject().get("url").getAsString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    // @SuppressWarnings("deprecation")
     public ItemBuilder withCustomSkullOwner(String playerName) {
         checkArgument(meta instanceof SkullMeta, "Not a player head item");
-        ((SkullMeta) meta).setOwningPlayer(Bukkit.getOfflinePlayer(playerName));
+        // ((SkullMeta) meta).setOwningPlayer(Bukkit.getOfflinePlayer(playerName));
+        var playerUUID = getOnlineUUID(playerName);
+        var textureUrl = getSkinURL(playerUUID);
+
+        var profile = Bukkit.createPlayerProfile(getOnlineUUID(playerName), playerName);
+        var textures = profile.getTextures();
+        try {        
+            textures.setSkin(new URL(textureUrl));
+            profile.setTextures(textures);
+            return withCustomSkullProfile(profile);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            return null;
+        }
         return this;
     }
 
