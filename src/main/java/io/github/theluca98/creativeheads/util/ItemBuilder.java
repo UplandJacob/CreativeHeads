@@ -30,7 +30,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.profile.PlayerProfile;
-import org.bukkit.Server;
+import org.bukkit.Bukkit;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -76,11 +76,8 @@ public class ItemBuilder {
     }
 
     public ItemBuilder withCustomSkullTexture(String textureUrl) {
-        var payload = Map.of("textures", Map.of("SKIN", Map.of("url", textureUrl)));
-        var json = CreativeHeads.GSON.toJson(payload);
-        var base64 = BaseEncoding.base64().encode(json.getBytes(Charsets.UTF_8));
-        var profile = Server.createPlayerProfile(UUID.randomUUID(), "CreativeHeadsCustomHead");
-        profile.getProperties().put("textures", new Property("textures", base64));
+        var profile = Bukkit.createPlayerProfile(UUID.randomUUID(), "CreativeHeadsCustomHead");
+        profile.setTextures(profile.getTextures().setSkin(textureUrl));
         return withCustomSkullProfile(profile);
     }
 
@@ -94,7 +91,7 @@ public class ItemBuilder {
     @SuppressWarnings("deprecation")
     public ItemBuilder withCustomSkullOwner(String playerName) {
         checkArgument(meta instanceof SkullMeta, "Not a player head item");
-        ((SkullMeta) meta).setOwningPlayer(playerName);
+        ((SkullMeta) meta).setOwningPlayer(Bukkit.getOfflinePlayer(playerName));
         return this;
     }
 
