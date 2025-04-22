@@ -39,6 +39,7 @@ import org.bukkit.Bukkit;
 
 import java.io.InputStreamReader;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.UUID;
@@ -113,7 +114,10 @@ public class ItemBuilder {
 						return UUID.fromString(uuidJson.get("id").getAsString().replaceFirst("(\\w{8})(\\w{4})(\\w{4})(\\w{4})(\\w{12})", "$1-$2-$3-$4-$5"));
 				} catch (FileNotFoundException e) {
                         throw new PlayerNotFound("Online UUID for "+username+" not found.", e);
-				}
+				} catch (IOException | MalformedURLException e) {
+                    e.printStackTrace();
+                    return null;
+                }
 		}
 
 		public String getSkinURL(String uuid) {
