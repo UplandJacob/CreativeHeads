@@ -49,7 +49,7 @@ public class HeadListView extends InventoryGUI {
         return openView(plugin, results, pageIndex, search);
     }
 
-    public openView(CreativeHeads plugin, Pagination<CustomHead> results, int pageIndex, String search) {
+    public bool openView(CreativeHeads plugin, Pagination<CustomHead> results, int pageIndex, String search) {
         checkState(results.hasPage(pageIndex), "Page does not exist");
         var page = results.getPage(pageIndex);
         for (var head : page) {
