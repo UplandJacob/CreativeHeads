@@ -29,7 +29,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.world.item.component.ResolvableProfile;
+import org.spigotmc.world.item.component.ResolvableProfile;
 
 import java.util.Arrays;
 import java.util.Map;
