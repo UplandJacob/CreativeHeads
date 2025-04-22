@@ -1,7 +1,7 @@
 name: "CreativeHeads"
 version: "${project.version}"
 main: "io.github.theluca98.creativeheads.CreativeHeads"
-api-version: "1.16"
+api-version: "1.21.1"
 author: "Luca"
 website: "https://github.com/TheLuca98/CreativeHeads"
 
