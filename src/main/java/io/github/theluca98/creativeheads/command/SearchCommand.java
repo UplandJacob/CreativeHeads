@@ -53,7 +53,7 @@ public class SearchCommand extends Subcommand {
             .thenApplyAsync(list -> new Pagination<>(list, HeadListView.PAGE_SIZE))
             .thenAcceptAsync((results) -> {
                 if (results.hasPage(0)) {
-                    new HeadListView(plugin, results, 0).open(sender);
+                    new HeadListView(plugin, results, 0, query).open(sender);
                 } else {
                     sender.sendMessage(ChatColor.RED + "The search returned no results.");
                 }
