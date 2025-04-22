@@ -112,7 +112,7 @@ public class ItemBuilder {
 						JsonObject uuidJson = JsonParser.parseReader(uuidReader).getAsJsonObject();
 						return UUID.fromString(uuidJson.get("id").getAsString().replaceFirst("(\\w{8})(\\w{4})(\\w{4})(\\w{4})(\\w{12})", "$1-$2-$3-$4-$5"));
 				} catch (FileNotFoundException e) {
-                        throw new PlayerNotFound("Online UUID for "+username+" not found.", e)
+                        throw new PlayerNotFound("Online UUID for "+username+" not found.", e);
 				}
 		}
 
