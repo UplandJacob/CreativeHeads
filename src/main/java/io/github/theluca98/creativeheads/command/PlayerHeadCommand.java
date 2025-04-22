@@ -71,7 +71,7 @@ public class PlayerHeadCommand extends Subcommand {
                 sender.playSound(sender.getLocation(), Sound.BLOCK_NOTE_BLOCK_DIDGERIDOO, SoundCategory.MASTER, 1, 0);
             }
         }, plugin.getExecutor()).exceptionally(e -> {
-            if (e instanceof PlayerNotFound) {
+            if (e.getCause() instanceof PlayerNotFound) {
                 sender.sendMessage(ChatColor.RED + e.getMessage());
             } else {
                 sender.sendMessage(ChatColor.RED + "An internal error occurred, please try again later.");
