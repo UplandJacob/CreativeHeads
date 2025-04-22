@@ -103,12 +103,12 @@ public class ItemBuilder {
 				}
 		}
 
-		public String getOnlineUUID(String username) {
+		public UUID getOnlineUUID(String username) {
 				try {
 						URL uuidUrl = new URL("https://api.mojang.com/users/profiles/minecraft/" + username);
 						InputStreamReader uuidReader = new InputStreamReader(uuidUrl.openStream());
 						JsonObject uuidJson = JsonParser.parseReader(uuidReader).getAsJsonObject();
-						return uuidJson.get("id").getAsString();
+						return UUID.fromString(uuidJson.get("id").getAsString().replaceFirst("(\\w{8})(\\w{4})(\\w{4})(\\w{4})(\\w{12})", "$1-$2-$3-$4-$5"));
 				} catch (Exception e) {
 						e.printStackTrace();
 						return null;
@@ -138,7 +138,7 @@ public class ItemBuilder {
 				var playerUUID = getOnlineUUID(playerName);
 				var textureUrl = getSkinURL(playerUUID);
 
-				var profile = Bukkit.createPlayerProfile(UUID.fromString(playerUUID), playerName);
+				var profile = Bukkit.createPlayerProfile(playerUUID, playerName);
 				var textures = profile.getTextures();
 				try {
 						textures.setSkin(new URL(textureUrl));
