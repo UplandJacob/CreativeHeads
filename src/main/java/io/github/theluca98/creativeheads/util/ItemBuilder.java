@@ -20,7 +20,7 @@ package io.github.theluca98.creativeheads.util;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.BaseEncoding;
-import com.mojang.authlib.GameProfile;
+// import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import io.github.theluca98.creativeheads.CreativeHeads;
 import lombok.SneakyThrows;
@@ -30,6 +30,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.profile.PlayerProfile;
+import org.bukkit.Server
 
 import java.util.Arrays;
 import java.util.Map;
@@ -78,13 +79,13 @@ public class ItemBuilder {
         var payload = Map.of("textures", Map.of("SKIN", Map.of("url", textureUrl)));
         var json = CreativeHeads.GSON.toJson(payload);
         var base64 = BaseEncoding.base64().encode(json.getBytes(Charsets.UTF_8));
-        var profile = new PlayerProfile(UUID.randomUUID(), "CreativeHeadsCustomHead");
+        var profile = Server.createPlayerProfile(UUID.randomUUID(), "CreativeHeadsCustomHead");
         profile.getProperties().put("textures", new Property("textures", base64));
         return withCustomSkullProfile(profile);
     }
 
     @SneakyThrows
-    public ItemBuilder withCustomSkullProfile(GameProfile profile) {
+    public ItemBuilder withCustomSkullProfile(PlayerProfile profile) {
         checkArgument(meta instanceof SkullMeta, "Not a player head item");
         ((SkullMeta) meta).setOwnerProfile(profile);
         return this;
