@@ -88,11 +88,11 @@ public class MainCommandDispatcher implements CommandExecutor, TabCompleter {
 
     private List<String> getUsageStrings(ParseResults<CommandSender> results) {
         CommandNode<CommandSender> currentNode;
-        var nodes = results.getContext().getNodes();
+        List<ParsedCommandNode<CommandNode<CommandSender>>> nodes = results.getContext().getNodes();
         if (nodes.isEmpty()) {
             currentNode = dispatcher.getRoot();
         } else {
-            var last = nodes.get(nodes.size() - 1);
+            ParsedCommandNode<CommandNode<CommandSender>> last = nodes.get(nodes.size() - 1);
             currentNode = last.getNode();
         }
         var currentPath = String.join(" ", dispatcher.getPath(currentNode));
