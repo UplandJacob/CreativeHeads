@@ -1,6 +1,6 @@
 package io.github.theluca98.creativeheads.util.exception;
   
-public class PlayerNotFound extends Exception {
+public class PlayerNotFound extends RuntimeException {
     public PlayerNotFound() {
         super();
     }
