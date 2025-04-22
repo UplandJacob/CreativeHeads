@@ -35,6 +35,7 @@ import org.bukkit.Bukkit;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.UUID;
+import java.net.URL;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
@@ -77,7 +78,7 @@ public class ItemBuilder {
 
     public ItemBuilder withCustomSkullTexture(String textureUrl) {
         var profile = Bukkit.createPlayerProfile(UUID.randomUUID(), "CreativeHeadsCustomHead");
-        profile.setTextures(profile.getTextures().setSkin(textureUrl));
+        profile.setTextures(profile.getTextures().setSkin(new URL(textureUrl)));
         return withCustomSkullProfile(profile);
     }
 
