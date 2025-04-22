@@ -39,17 +39,17 @@ public class HeadListView extends InventoryGUI {
     }
     public HeadListView(CreativeHeads plugin, Pagination<CustomHead> results, int pageIndex) {
         super(plugin, String.format("Heads - Page %d of %d", pageIndex+1, results.pageCount()));
-        return openView(plugin, results, pageIndex, "");
+        openView(plugin, results, pageIndex, "");
     }
     public HeadListView(CreativeHeads plugin, Pagination<CustomHead> results, String search) {
         this(plugin, results, 0, search);
     }
     public HeadListView(CreativeHeads plugin, Pagination<CustomHead> results, int pageIndex, String search) {
         super(plugin, String.format("Heads Search: "+search+" - Page %d of %d", pageIndex+1, results.pageCount()));
-        return openView(plugin, results, pageIndex, search);
+        openView(plugin, results, pageIndex, search);
     }
 
-    public boolean openView(CreativeHeads plugin, Pagination<CustomHead> results, int pageIndex, String search) {
+    public void openView(CreativeHeads plugin, Pagination<CustomHead> results, int pageIndex, String search) {
         checkState(results.hasPage(pageIndex), "Page does not exist");
         var page = results.getPage(pageIndex);
         for (var head : page) {
