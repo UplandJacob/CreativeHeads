@@ -30,11 +30,15 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.profile.PlayerProfile;
+import org.bukkit.profile.PlayerTextures;
 import org.bukkit.Bukkit;
 
+
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.UUID;
+import java.util.Base64;
 import java.net.URL;
 import java.net.MalformedURLException;
 
@@ -132,7 +136,7 @@ public class ItemBuilder {
 				var playerUUID = getOnlineUUID(playerName);
 				var textureUrl = getSkinURL(playerUUID);
 
-				var profile = Bukkit.createPlayerProfile(getOnlineUUID(playerName), playerName);
+				var profile = Bukkit.createPlayerProfile(new UUID(getOnlineUUID(playerName)), playerName);
 				var textures = profile.getTextures();
 				try {
 						textures.setSkin(new URL(textureUrl));
