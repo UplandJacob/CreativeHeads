@@ -78,7 +78,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder withCustomSkullTexture(String textureUrl) {
-        var profile = Bukkit.createPlayerProfile(UUID.randomUUID(), "CreativeHeadsCustomHead");
+        var profile = Bukkit.createPlayerProfile(UUID.randomUUID(), "CreativeHeads");
         var textures = profile.getTextures();
         try {        
             textures.setSkin(new URL(textureUrl));
