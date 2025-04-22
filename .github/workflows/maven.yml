@@ -21,6 +21,11 @@ jobs:
           distribution: temurin
           cache: maven
 
+      - name: BuildTools
+        run: |
+          curl -fLsS "https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar" -o BuildTools.jar &&
+          java -jar BuildTools.jar --rev 1.21.1 --remapped
+
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
