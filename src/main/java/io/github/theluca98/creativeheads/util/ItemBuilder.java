@@ -25,6 +25,7 @@ import com.google.gson.JsonParser;
 // import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import io.github.theluca98.creativeheads.CreativeHeads;
+import io.github.theluca98.creativeheads.util.exception.PlayerNotFound;
 import lombok.SneakyThrows;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
@@ -37,6 +38,7 @@ import org.bukkit.Bukkit;
 
 
 import java.io.InputStreamReader;
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.UUID;
@@ -109,9 +111,8 @@ public class ItemBuilder {
 						InputStreamReader uuidReader = new InputStreamReader(uuidUrl.openStream());
 						JsonObject uuidJson = JsonParser.parseReader(uuidReader).getAsJsonObject();
 						return UUID.fromString(uuidJson.get("id").getAsString().replaceFirst("(\\w{8})(\\w{4})(\\w{4})(\\w{4})(\\w{12})", "$1-$2-$3-$4-$5"));
-				} catch (Exception e) {
-						e.printStackTrace();
-						return null;
+				} catch (FileNotFoundException e) {
+                        throw new PlayerNotFound("Online UUID for "+username+" not found.", e)
 				}
 		}
 
