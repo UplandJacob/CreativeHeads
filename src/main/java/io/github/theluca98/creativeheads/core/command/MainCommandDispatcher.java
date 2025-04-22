@@ -24,7 +24,6 @@ import com.mojang.brigadier.ParseResults;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.suggestion.Suggestion;
 import com.mojang.brigadier.tree.CommandNode;
-import com.mojang.brigadier.context.ParsedCommandNode;
 import io.github.theluca98.creativeheads.CreativeHeads;
 import lombok.SneakyThrows;
 import org.bukkit.ChatColor;
@@ -89,12 +88,11 @@ public class MainCommandDispatcher implements CommandExecutor, TabCompleter {
 
     private List<String> getUsageStrings(ParseResults<CommandSender> results) {
         CommandNode<CommandSender> currentNode;
-        List<ParsedCommandNode<CommandNode<CommandSender>>> nodes = results.getContext().getNodes();
+        List<ParsedCommandNode<CommandNode>> nodes = results.getContext().getNodes();
         if (nodes.isEmpty()) {
             currentNode = dispatcher.getRoot();
         } else {
-            ParsedCommandNode<CommandNode<CommandSender>> last = nodes.get(nodes.size() - 1);
-            currentNode = last.getNode();
+            currentNode = nodes.get(nodes.size() - 1).getNode();
         }
         var currentPath = String.join(" ", dispatcher.getPath(currentNode));
         return dispatcher.getSmartUsage(currentNode, results.getContext().getSource())
