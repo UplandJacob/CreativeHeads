@@ -20,7 +20,6 @@ package io.github.theluca98.creativeheads.util;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.BaseEncoding;
-import net.minecraft.world.item.component.ResolvableProfile;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import io.github.theluca98.creativeheads.CreativeHeads;
@@ -30,6 +29,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.world.item.component.ResolvableProfile;
 
 import java.util.Arrays;
 import java.util.Map;
