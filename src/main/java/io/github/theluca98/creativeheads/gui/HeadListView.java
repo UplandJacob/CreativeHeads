@@ -32,15 +32,24 @@ import org.bukkit.SoundCategory;
 import static com.google.common.base.Preconditions.checkState;
 
 public class HeadListView extends InventoryGUI {
-
     public static final int PAGE_SIZE = COLUMNS * 5;
 
     public HeadListView(CreativeHeads plugin, Pagination<CustomHead> results) {
         this(plugin, results, 0);
     }
-
     public HeadListView(CreativeHeads plugin, Pagination<CustomHead> results, int pageIndex) {
-        super(plugin, String.format("Heads - Page %d of %d", pageIndex + 1, results.pageCount()));
+        super(plugin, String.format("Heads - Page %d of %d", pageIndex+1, results.pageCount()));
+        return openView(plugin, results, pageIndex);
+    }
+    public HeadListView(CreativeHeads plugin, Pagination<CustomHead> results, String search) {
+        this(plugin, results, 0, search);
+    }
+    public HeadListView(CreativeHeads plugin, Pagination<CustomHead> results, int pageIndex, String search) {
+        super(plugin, String.format("Heads Search: "+search+" - Page %d of %d", pageIndex+1, results.pageCount()));
+        return openView(plugin, results, pageIndex);
+    }
+
+    public openView(CreativeHeads plugin, Pagination<CustomHead> results, int pageIndex) {
         checkState(results.hasPage(pageIndex), "Page does not exist");
         var page = results.getPage(pageIndex);
         for (var head : page) {
