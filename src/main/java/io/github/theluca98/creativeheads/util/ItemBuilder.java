@@ -136,7 +136,7 @@ public class ItemBuilder {
 				checkArgument(meta instanceof SkullMeta, "Not a player head item");
 				// ((SkullMeta) meta).setOwningPlayer(Bukkit.getOfflinePlayer(playerName));
 				var playerUUID = getOnlineUUID(playerName);
-				var textureUrl = getSkinURL(playerUUID);
+				var textureUrl = getSkinURL(playerUUID.asString());
 
 				var profile = Bukkit.createPlayerProfile(playerUUID, playerName);
 				var textures = profile.getTextures();
