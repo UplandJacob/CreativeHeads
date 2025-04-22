@@ -24,6 +24,7 @@ import com.mojang.brigadier.ParseResults;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.suggestion.Suggestion;
 import com.mojang.brigadier.tree.CommandNode;
+import com.mojang.brigadier.context.CommandContext;
 import io.github.theluca98.creativeheads.CreativeHeads;
 import lombok.SneakyThrows;
 import org.bukkit.ChatColor;
