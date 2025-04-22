@@ -36,6 +36,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.UUID;
 import java.net.URL;
+import java.net.MalformedURLException;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
