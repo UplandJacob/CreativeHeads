@@ -39,17 +39,17 @@ public class HeadListView extends InventoryGUI {
     }
     public HeadListView(CreativeHeads plugin, Pagination<CustomHead> results, int pageIndex) {
         super(plugin, String.format("Heads - Page %d of %d", pageIndex+1, results.pageCount()));
-        return openView(plugin, results, pageIndex);
+        return openView(plugin, results, pageIndex, "");
     }
     public HeadListView(CreativeHeads plugin, Pagination<CustomHead> results, String search) {
         this(plugin, results, 0, search);
     }
     public HeadListView(CreativeHeads plugin, Pagination<CustomHead> results, int pageIndex, String search) {
         super(plugin, String.format("Heads Search: "+search+" - Page %d of %d", pageIndex+1, results.pageCount()));
-        return openView(plugin, results, pageIndex);
+        return openView(plugin, results, pageIndex, search);
     }
 
-    public openView(CreativeHeads plugin, Pagination<CustomHead> results, int pageIndex) {
+    public openView(CreativeHeads plugin, Pagination<CustomHead> results, int pageIndex, String search) {
         checkState(results.hasPage(pageIndex), "Page does not exist");
         var page = results.getPage(pageIndex);
         for (var head : page) {
@@ -106,11 +106,23 @@ public class HeadListView extends InventoryGUI {
         }
 
         for (int i = 1; i <= 7; i++) {
-            addItem(
-                slot(5, i),
-                ItemBuilder.of(Material.GRAY_STAINED_GLASS_PANE).withName(ChatColor.RESET.toString()).build(),
-                ClickFunction.NONE
-            );
+            if (i == 4 && search == "") {
+                 addItem(
+                    slot(5, 4),
+                    ItemBuilder.of(Material.BARRIER).withName(ChatColor.YELLOW + "\u25B2 Back to categories \u25B2").build(),
+                    (player, click) -> {
+                        player.playSound(player.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 1, 1);
+                        new CategoryListView(plugin).open(player);
+                        return false;
+                    }
+                );
+            } else {
+                addItem(
+                    slot(5, i),
+                    ItemBuilder.of(Material.GRAY_STAINED_GLASS_PANE).withName(ChatColor.RESET.toString()).build(),
+                    ClickFunction.NONE
+                );
+            }
         }
     }
 
