@@ -72,7 +72,7 @@ public class PlayerHeadCommand extends Subcommand {
             }
         }, plugin.getExecutor()).exceptionally(e -> {
             if (e instanceof PlayerNotFound) {
-                sender.sendMessage(ChatColor.RED + e.message);
+                sender.sendMessage(ChatColor.RED + e.getMessage());
             } else {
                 sender.sendMessage(ChatColor.RED + "An internal error occurred, please try again later.");
                 plugin.logException(e);
