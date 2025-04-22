@@ -23,6 +23,7 @@ import com.mojang.brigadier.context.CommandContext;
 import io.github.theluca98.creativeheads.CreativeHeads;
 import io.github.theluca98.creativeheads.core.command.Subcommand;
 import io.github.theluca98.creativeheads.util.ItemBuilder;
+import io.github.theluca98.creativeheads.util.exception.PlayerNotFound;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -70,8 +71,12 @@ public class PlayerHeadCommand extends Subcommand {
                 sender.playSound(sender.getLocation(), Sound.BLOCK_NOTE_BLOCK_DIDGERIDOO, SoundCategory.MASTER, 1, 0);
             }
         }, plugin.getExecutor()).exceptionally(e -> {
-            sender.sendMessage(ChatColor.RED + "An internal error occurred, please try again later.");
-            plugin.logException(e);
+            if (e instanceof PlayerNotFound) {
+                sender.sendMessage(ChatColor.RED + e.message);
+            } else {
+                sender.sendMessage(ChatColor.RED + "An internal error occurred, please try again later.");
+                plugin.logException(e);
+            }
             return null;
         });
     }
