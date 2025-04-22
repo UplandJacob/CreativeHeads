@@ -23,7 +23,6 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.ParseResults;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.suggestion.Suggestion;
-import com.mojang.brigadier.context.ParsedCommandNode;
 import com.mojang.brigadier.tree.CommandNode;
 import io.github.theluca98.creativeheads.CreativeHeads;
 import lombok.SneakyThrows;
@@ -89,7 +88,7 @@ public class MainCommandDispatcher implements CommandExecutor, TabCompleter {
 
     private List<String> getUsageStrings(ParseResults<CommandSender> results) {
         CommandNode<CommandSender> currentNode;
-        List<ParsedCommandNode<CommandSender>> nodes = results.getContext().getNodes();
+        var nodes = results.getContext().getNodes();
         if (nodes.isEmpty()) {
             currentNode = dispatcher.getRoot();
         } else {
