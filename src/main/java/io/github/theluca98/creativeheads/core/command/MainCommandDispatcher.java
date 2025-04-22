@@ -91,7 +91,7 @@ public class MainCommandDispatcher implements CommandExecutor, TabCompleter {
         if (results.getContext().getNodes().isEmpty()) {
             currentNode = dispatcher.getRoot();
         } else {
-            currentNode = results.getContext().getNodes().get(results.getContext().getNodes().size() - 1);
+            currentNode = results.getContext().getNodes().get(results.getContext().getNodes().size() - 1).getNode();
         }
         var currentPath = String.join(" ", dispatcher.getPath(currentNode));
         return dispatcher.getSmartUsage(currentNode, results.getContext().getSource())
