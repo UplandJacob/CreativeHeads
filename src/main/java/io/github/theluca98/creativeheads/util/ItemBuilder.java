@@ -20,6 +20,8 @@ package io.github.theluca98.creativeheads.util;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.BaseEncoding;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 // import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import io.github.theluca98.creativeheads.CreativeHeads;
@@ -106,14 +108,14 @@ public class ItemBuilder {
 						URL uuidUrl = new URL("https://api.mojang.com/users/profiles/minecraft/" + username);
 						InputStreamReader uuidReader = new InputStreamReader(uuidUrl.openStream());
 						JsonObject uuidJson = JsonParser.parseReader(uuidReader).getAsJsonObject();
-						return uuid = uuidJson.get("id").getAsString();
+						return uuidJson.get("id").getAsString();
 				} catch (Exception e) {
 						e.printStackTrace();
 						return null;
 				}
 		}
 
-		public String getSkinUrl(String uuid) {
+		public String getSkinURL(String uuid) {
 				try {
 						URL profileUrl = new URL("https://sessionserver.mojang.com/session/minecraft/profile/" + uuid);
 						InputStreamReader profileReader = new InputStreamReader(profileUrl.openStream());
