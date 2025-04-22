@@ -85,7 +85,7 @@ public class ItemBuilder {
             return withCustomSkullProfile(profile);
         } catch (MalformedURLException e) {
             e.printStackTrace();
-            return null
+            return null;
         }
     }
 
