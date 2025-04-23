@@ -38,14 +38,14 @@ public class HeadListView extends InventoryGUI {
         this(plugin, results, 0);
     }
     public HeadListView(CreativeHeads plugin, Pagination<CustomHead> results, int pageIndex) {
-        super(plugin, String.format("Heads - Page %d of %d", pageIndex+1, results.pageCount()));
+        super(plugin, String.format("Heads - Page %d/%d", pageIndex+1, results.pageCount()));
         openView(plugin, results, pageIndex, "");
     }
     public HeadListView(CreativeHeads plugin, Pagination<CustomHead> results, String search) {
         this(plugin, results, 0, search);
     }
     public HeadListView(CreativeHeads plugin, Pagination<CustomHead> results, int pageIndex, String search) {
-        super(plugin, String.format("Heads Search: "+search+" - Page %d of %d", pageIndex+1, results.pageCount()));
+        super(plugin, String.format("Head search: "+search+" - Page %d/%d", pageIndex+1, results.pageCount()));
         openView(plugin, results, pageIndex, search);
     }
 
@@ -76,7 +76,7 @@ public class HeadListView extends InventoryGUI {
                 ItemBuilder.of(Material.LIME_STAINED_GLASS_PANE).withName(ChatColor.GREEN + "\u25C0 Previous page").build(),
                 (player, click) -> {
                     player.playSound(player.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 1, 1);
-                    new HeadListView(plugin, results, pageIndex - 1).open(player);
+                    new HeadListView(plugin, results, pageIndex-1, search).open(player);
                     return false;
                 }
             );
@@ -93,7 +93,7 @@ public class HeadListView extends InventoryGUI {
                 ItemBuilder.of(Material.LIME_STAINED_GLASS_PANE).withName(ChatColor.GREEN + "Next page \u25B6").build(),
                 (player, click) -> {
                     player.playSound(player.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 1, 1);
-                    new HeadListView(plugin, results, pageIndex + 1).open(player);
+                    new HeadListView(plugin, results, pageIndex+1, search).open(player);
                     return false;
                 }
             );
