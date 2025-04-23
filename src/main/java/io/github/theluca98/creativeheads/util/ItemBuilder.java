@@ -135,7 +135,6 @@ public class ItemBuilder {
 				}
 		}
 
-		// @SuppressWarnings("deprecation")
 		public ItemBuilder withCustomSkullOwner(String playerName) {
 				checkArgument(meta instanceof SkullMeta, "Not a player head item");
 				var playerUUID = getOnlineUUID(playerName);
