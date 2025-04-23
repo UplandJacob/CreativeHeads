@@ -22,7 +22,6 @@ import com.google.common.base.Charsets;
 import com.google.common.io.BaseEncoding;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-// import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import io.github.theluca98.creativeheads.CreativeHeads;
 import io.github.theluca98.creativeheads.util.exception.PlayerNotFound;
