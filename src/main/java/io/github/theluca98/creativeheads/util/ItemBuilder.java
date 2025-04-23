@@ -138,7 +138,6 @@ public class ItemBuilder {
 		// @SuppressWarnings("deprecation")
 		public ItemBuilder withCustomSkullOwner(String playerName) {
 				checkArgument(meta instanceof SkullMeta, "Not a player head item");
-				// ((SkullMeta) meta).setOwningPlayer(Bukkit.getOfflinePlayer(playerName));
 				var playerUUID = getOnlineUUID(playerName);
 				var textureUrl = getSkinURL(playerUUID.toString());
 
