@@ -45,12 +45,8 @@ public class HeadListView extends InventoryGUI {
         this(plugin, results, 0, search);
     }
     public HeadListView(CreativeHeads plugin, Pagination<CustomHead> results, int pageIndex, String search) {
-        if (search == "") {
-            this(plugin, results, pageIndex);
-        } else {
-            super(plugin, String.format("Head search: "+search+" - Page %d/%d", pageIndex+1, results.pageCount()));
-            openView(plugin, results, pageIndex, search);
-        }
+        super(plugin, String.format(((search == "") ? "Heads - Page %d/%d" : "Head search: "+search+" - Page %d/%d"), pageIndex+1, results.pageCount()));
+        openView(plugin, results, pageIndex, search);
     }
 
     public void openView(CreativeHeads plugin, Pagination<CustomHead> results, int pageIndex, String search) {
