@@ -81,8 +81,8 @@ public class LocalRepository {
                 initializeDatabase();
                 saveData(heads);
             } catch(Exception e) {
-                plugin.getLogger().warn("Failed to update from remote database: "+e.getMessage());
-                break;
+                plugin.getLogger().info("Failed to update from remote database: "+e.getMessage());
+                return;
             }
             plugin.getLogger().info("The database is now up to date.");
         } else {
