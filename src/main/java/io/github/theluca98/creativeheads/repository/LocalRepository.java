@@ -80,6 +80,9 @@ public class LocalRepository {
             try (var heads = remote.downloadData()) {
                 initializeDatabase();
                 saveData(heads);
+            } catch {
+                plugin.getLogger().warn("Failed to update from remote database.");
+                break;
             }
             plugin.getLogger().info("The database is now up to date.");
         } else {
