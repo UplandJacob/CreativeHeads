@@ -42,8 +42,7 @@ public class RemoteRepository {
     public RemoteRepository(CreativeHeads plugin) {
         this.plugin = plugin;
         this.client = HttpClient.newHttpClient();
-        this.csvFormat = CSVFormat.Builder
-            .create(CSVFormat.DEFAULT)
+        this.csvFormat = CSVFormat.DEFAULT.builder()
             .setSkipHeaderRecord(true)
             .setHeader()
             .build();
