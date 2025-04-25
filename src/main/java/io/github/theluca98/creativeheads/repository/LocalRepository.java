@@ -77,7 +77,8 @@ public class LocalRepository {
     @SneakyThrows
     private void updateDatabase() {
         if (needsUpdate()) {
-            try (var heads = remote.downloadData()) {
+            try {
+                var heads = remote.downloadData()
                 initializeDatabase();
                 saveData(heads);
             } catch(Exception e) {
