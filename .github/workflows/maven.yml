@@ -25,12 +25,12 @@ jobs:
         run: mvn -B package --file pom.xml
 
       - name: Copy artifacts
-        run: |
-          JAR_FILE=$(find target -name "*.jar" -type f | head -n 1)
-          cp "$JAR_FILE" ./RestartAR.jar
+        run: cp target/CreativeHeads.jar .
 
       - name: Upload bundle
         uses: actions/upload-artifact@v4.6.2
         with:
-          name: RestartAR-build
-          path: RestartAR.jar
+          name: Bundle
+          path: |
+            CreativeHeads.jar
+            LICENSE.txt
